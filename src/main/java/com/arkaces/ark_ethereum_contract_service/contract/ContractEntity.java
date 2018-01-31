@@ -28,30 +28,48 @@ public class ContractEntity {
     @Column(columnDefinition="TEXT")
     private String contractCode;
 
-    @Column(columnDefinition="TEXT")
-    private String contractParamsJson;
-
     private BigInteger gasLimit;
 
     private String arkSmartBridge;
+
     private String serviceArkAddress;
+
     private String returnArkAddress;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal arkPerEthExchangeRate;
+
     private BigInteger estimatedGasCost;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal estimatedEthCost;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal arkFlatFee;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal arkFeePercent;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal arkFeeTotal;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal requiredArk;
 
     private String arkPaymentTransactionId;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal arkPaymentAmount;
 
     private BigInteger gasUsed;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal deploymentArkCost;
+
     private String returnArkTransactionId;
-    private String returnArkTransactionUrl;
+
+    @Column(precision = 20, scale = 8)
     private BigDecimal returnArkAmount;
+
     private String ethContractTransactionId;
-    private String ethContractTransactionUrl;
 }
