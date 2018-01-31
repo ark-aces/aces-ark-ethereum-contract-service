@@ -1,0 +1,160 @@
+serverInfo:
+  name: "Aces ARK-ETH Channel Service"
+  description: "ACES ARK-ETH Channel service for transferring ARK to ETH"
+  instructions: >
+    With this service, users are able to deploy Ethereum code contracts directly to the
+    Ethereum network using Ark. Users supply compiled solidity contract code to the service
+    and pay for deployment using an Ark wallet.
+
+    Ethereum contract code and ABI interface can be obtained by compiling solidity code.
+    If you are new to ethereum smart contracts, you can use the [Remix Solidity Web Compiler](https://remix.ethereum.org/)
+    to obtain the required values for this service:
+
+    * Enter the desired solidity code in the IDE editor window.
+    * Choose "Contract details (bytecode, interface etc.)" to expand compiled information.
+    * Copy bytecode and ABI interface JSON into the inputs below.
+    * If contract has constructor parameters, enter them below in a JSON array.
+
+  version: "1.0.0"
+  websiteUrl: "https://arkaces.com"
+  flatFee: "0"
+  percentFee: "1.00%"
+  inputSchema: >
+    {
+      "type": "object",
+      "properties": {
+        "contractAbiJson": {
+          "type": "string",
+          "title": "Ethereum Contract ABI Json (Interface)",
+          "description": "Enter API json data output by your solidity compiler."
+        },
+        "contractCode": {
+          "type": "string",
+          "title": "Ethereum Contract Code (Bytecode)",
+          "description": "Enter compiled code data output by your solidity compiler."
+        },
+        "gasLimit": {
+          "type": "number",
+          "title": "Ethereum Contract Params Json",
+          "description": "Enter the maximum amount of gas that should be used when deploying your code contract."
+        }
+      },
+      "required": [
+        "contractAbiJson",
+        "contractCode",
+        "contractParamsJson",
+        "gasLimit"
+      ]
+    }
+  # todo: check output schema properties
+  outputSchema: >
+    {
+      "type": "object",
+      "properties": {
+        "contractAbiJson": {
+          "type": "string"
+        },
+        "contractCode": {
+          "type": "string"
+        },
+        "gasLimit": {
+          "type": "number"
+        },
+        "arkSmartBridge": {
+          "type": "string"
+        },
+        "serviceArkAddress": {
+          "type": "string"
+        },
+        "returnArkAddress": {
+          "type": "string"
+        },
+        "arkPerEthExchangeRate": {
+          "type": "number"
+        },
+        "estimatedGasCost": {
+          "type": "number"
+        },
+        "estimatedEthCost": {
+          "type": "number"
+        },
+        "gasUsed": {
+          "type": "number"
+        },
+        "deploymentArkCost": {
+          "type": "number"
+        },
+        "arkFlatFee": {
+          "type": "number"
+        },
+        "arkFeePercent": {
+          "type": "number"
+        },
+        "arkFeeTotal": {
+          "type": "number"
+        },
+        "requiredArk": {
+          "type": "number"
+        },
+        "returnArkTransactionId": {
+          "type": "string"
+        },
+        "returnArkAmount": {
+          "type": "number"
+        },
+        "ethContractTransactionHash": {
+          "type": "string"
+        },
+        "ethContractAddress": {
+          "type": "string"
+        }
+      }
+    }
+
+#spring:
+#  datasource:
+#    driver-class-name: "org.h2.Driver"
+#    url: "jdbc:h2:~/tmp/ark_eth_channel_service.db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE"
+#  database:
+#    hibernate:
+#      ddl-auto: "validate"
+#  jpa:
+#      database-platform: org.hibernate.dialect.H2Dialect
+
+#spring:
+#  datasource:
+#    platform: postgres
+#    url: jdbc:postgresql://localhost:5432/aces_ark_eth_channel_db
+#    username: service_user
+#    password: password
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#flyway:
+#  enabled: true
+
+arkNetworkConfigPath: "ark_network_config/testnet.yml"
+
+serviceEthAccount:
+  address: "change-me"
+  passphrase: "change-me"
+
+fees:
+  arkFlatFee: 0
+  arkPercentFee: 1
+
+server:
+  port: 9192
+
+arkListener:
+  url: "http://localhost:9192"
+
+serviceArkAccount:
+  address: "change-me"
+  passphrase: "change-me"
+
+arkEventCallbackUrl: "http://localhost:9190/arkEvents"
+
+arkMinConfirmations: 5
+
+ethRpcRootUri: "http://127.0.0.1:8545"
