@@ -2,6 +2,15 @@
 
 ACES ARK to Ethereum Smart Contract service
 
+## Run Application
+
+Run application:
+
+```
+mvn spring-boot:run
+```
+
+
 ## Using Service
 
 Get service info:
