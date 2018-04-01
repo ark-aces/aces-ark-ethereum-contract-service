@@ -30,19 +30,19 @@ serverInfo:
         },
         "contractCode": {
           "type": "string",
+          "format": "text",
           "title": "Ethereum Contract Code (Bytecode)",
           "description": "Enter compiled code data output by your solidity compiler."
         },
         "gasLimit": {
           "type": "number",
-          "title": "Ethereum Contract Params Json",
+          "title": "Gas Limit",
           "description": "Enter the maximum amount of gas that should be used when deploying your code contract."
         }
       },
       "required": [
         "contractAbiJson",
         "contractCode",
-        "contractParamsJson",
         "gasLimit"
       ]
     }
